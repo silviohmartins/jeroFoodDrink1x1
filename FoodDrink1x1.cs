@@ -16,6 +16,7 @@ public class FoodDrink1x1 : IOnLoad
     private readonly DatabaseServer _databaseServer;
     private readonly ModConfig _config;
     private readonly HashSet<string> _targetParentIds;
+    private readonly HashSet<string> _excludedItemIds;
 
     public FoodDrink1x1(ISptLogger<FoodDrink1x1> logger, DatabaseServer databaseServer, ModHelper modHelper)
     {
@@ -28,7 +29,8 @@ public class FoodDrink1x1 : IOnLoad
         {
             _logger.Error("[JERO] FoodDrink1x1, ERROR: Could not determine mod path. The mod will not make any changes.");
             _config = new ModConfig();
-            _targetParentIds = new HashSet<string>();
+            _targetParentIds = [];
+            _excludedItemIds = [];
             return;
         }
 
@@ -39,7 +41,15 @@ public class FoodDrink1x1 : IOnLoad
             _logger.Warning("[JERO] FoodDrink1x1, WARNING: config.json not found or empty. The mod will not make any changes.");
         }
 
-        _targetParentIds = new HashSet<string>(_config.TargetParentIds);
+        _targetParentIds = [.. _config.TargetParentIds];
+
+        var excludeConfig = modHelper.GetJsonDataFromFile<ExcludeConfig>(modPath, Path.Join("config", "exclude.json")) ?? new ExcludeConfig();
+        _excludedItemIds = [.. excludeConfig.ExcludeItemIds];
+
+        if (_excludedItemIds.Count > 0)
+        {
+            _logger.Info($"[JERO] FoodDrink1x1, {_excludedItemIds.Count} item(s) will be excluded from resizing.");
+        }
     }
 
     public Task OnLoad()
@@ -49,6 +59,11 @@ public class FoodDrink1x1 : IOnLoad
 
         foreach (var item in itemsDb.Values.Where(item => _targetParentIds.Contains(item.Parent)))
         {
+            if (_excludedItemIds.Contains(item.Id))
+            {
+                continue;
+            }
+
             if (TryResizeItem(item))
             {
                 itemsAdjusted++;
