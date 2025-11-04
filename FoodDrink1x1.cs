@@ -26,7 +26,7 @@ public class FoodDrink1x1 : IOnLoad
 
         if (string.IsNullOrEmpty(modPath))
         {
-            _logger.Error("[JERO] ERROR: Could not determine mod path. The mod will not make any changes.");
+            _logger.Error("[JERO] FoodDrink1x1, ERROR: Could not determine mod path. The mod will not make any changes.");
             _config = new ModConfig();
             _targetParentIds = new HashSet<string>();
             return;
@@ -36,11 +36,7 @@ public class FoodDrink1x1 : IOnLoad
 
         if (_config.TargetParentIds.Count == 0)
         {
-            _logger.Warning("[JERO] WARNING: config.json not found or empty. The mod will not make any changes.");
-        }
-        else
-        {
-            _logger.Info("[JERO] config.json loaded successfully.");
+            _logger.Warning("[JERO] FoodDrink1x1, WARNING: config.json not found or empty. The mod will not make any changes.");
         }
 
         _targetParentIds = new HashSet<string>(_config.TargetParentIds);
@@ -59,7 +55,7 @@ public class FoodDrink1x1 : IOnLoad
             }
         }
 
-        _logger.Info($"[JERO] Drink & Food 1x1, {itemsAdjusted} adjustments made!");
+        _logger.Info($"[JERO] FoodDrink1x1, {itemsAdjusted} adjustments made!");
         return Task.CompletedTask;
     }
 
