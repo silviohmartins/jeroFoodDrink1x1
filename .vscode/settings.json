@@ -1,54 +1,50 @@
 {
-  // Configurações do C# e .NET
-  "omnisharp.enableRoslynAnalyzers": true,
-  "omnisharp.enableEditorConfigSupport": true,
-  "omnisharp.enableImportCompletion": true,
-  "omnisharp.organizeImportsOnFormat": true,
-  "omnisharp.useModernNet": true,
-  
-  // Configurações do editor
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit",
-    "source.fixAll": "explicit"
-  },
-  "editor.rulers": [120],
-  "editor.tabSize": 4,
-  "editor.insertSpaces": true,
-  "editor.detectIndentation": false,
-  
-  // Configurações de arquivos
-  "files.exclude": {
-    "**/bin": true,
-    "**/obj": true,
-    "**/.vs": true
-  },
-  "files.watcherExclude": {
-    "**/bin/**": true,
-    "**/obj/**": true,
-    "**/.vs/**": true
-  },
-  
-  // Configurações de busca
-  "search.exclude": {
-    "**/bin": true,
-    "**/obj": true,
-    "**/.vs": true,
-    "**/node_modules": true
-  },
-  
-  // Configurações específicas do C#
-  "[csharp]": {
-    "editor.defaultFormatter": "ms-dotnettools.csharp",
+    // Configurações do C# e .NET
+    "omnisharp.enableRoslynAnalyzers": true,
+    "omnisharp.enableEditorConfigSupport": true,
+    "omnisharp.useModernNet": true,
+    // Configurações do editor
     "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit",
+        "source.fixAll": "explicit"
+    },
+    "editor.rulers": [
+        120
+    ],
     "editor.tabSize": 4,
-    "editor.insertSpaces": true
-  },
-  
-  // Configurações de JSON
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features",
-    "editor.formatOnSave": true
-  }
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    // Configurações de arquivos
+    "files.exclude": {
+        "**/bin": true,
+        "**/obj": true,
+        "**/.vs": true
+    },
+    "files.watcherExclude": {
+        "**/bin/**": true,
+        "**/obj/**": true,
+        "**/.vs/**": true
+    },
+    // Configurações de busca
+    "search.exclude": {
+        "**/bin": true,
+        "**/obj": true,
+        "**/.vs": true,
+        "**/node_modules": true
+    },
+    // Configurações específicas do C#
+    "[csharp]": {
+        "editor.defaultFormatter": "ms-dotnettools.csharp",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true
+    },
+    // Configurações de JSON
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features",
+        "editor.formatOnSave": true
+    },
+    "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": true,
+    "dotnet.formatting.organizeImportsOnFormat": true
 }
-
