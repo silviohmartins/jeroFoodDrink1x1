@@ -26,7 +26,7 @@ public class FoodDrink1x1 : IOnLoad
 
         if (string.IsNullOrEmpty(modPath))
         {
-            _logger.Error("[JERO] ERRO: Não foi possível determinar o caminho do mod. O mod não fará alterações.");
+            _logger.Error("[JERO] ERROR: Could not determine mod path. The mod will not make any changes.");
             _config = new ModConfig();
             _targetParentIds = new HashSet<string>();
             return;
@@ -36,7 +36,11 @@ public class FoodDrink1x1 : IOnLoad
 
         if (_config.TargetParentIds.Count == 0)
         {
-            _logger.Warning("[JERO] AVISO: config.json não encontrado ou vazio. O mod não fará alterações.");
+            _logger.Warning("[JERO] WARNING: config.json not found or empty. The mod will not make any changes.");
+        }
+        else
+        {
+            _logger.Info("[JERO] config.json loaded successfully.");
         }
 
         _targetParentIds = new HashSet<string>(_config.TargetParentIds);
@@ -59,11 +63,6 @@ public class FoodDrink1x1 : IOnLoad
         return Task.CompletedTask;
     }
 
-    /// <summary>
-    /// Tenta redimensionar um item para 1x1.
-    /// </summary>
-    /// <param name="item">O TemplateItem a ser modificado.</param>
-    /// <returns>True se o item foi alterado, False caso contrário.</returns>
     private bool TryResizeItem(TemplateItem item)
     {
         if (item.Properties is null)
